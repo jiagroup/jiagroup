@@ -1,0 +1,4 @@
+<option value="">所有板块</option>
+<#list forumList as forum>
+<option value="${forum.id!}" <#if forumId??><#if forum.id==forumId>selected="selected"</#if></#if>>${forum.title!}</option>
+</#list>

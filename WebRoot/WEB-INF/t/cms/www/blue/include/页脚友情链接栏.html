@@ -1,0 +1,15 @@
+<div id="hotlink">
+	&nbsp;&nbsp;
+	<div class="fl"><img src="../../${res}/bbs_forum/img/yqlj.gif" />
+	<a href="http://count.chanet.com.cn/click.cgi?a=497500&d=361345&u=&e=" target="_blank"><IMG SRC="http://file.chanet.com.cn/image.cgi?a=497488&d=361345&u=&e=" width="439" border="0" height="36"></a>
+	</div>
+	<div class="fr">&nbsp;&nbsp;&nbsp;&nbsp;
+	
+	[@cms_friendlink_list]
+	[#list tag_list as link]
+	<a href="${link.domain}" onclick="$.get('${base}/friendlink_view.jspx?id=${link.id}')" target="_blank">${link.name}&nbsp;&nbsp;|&nbsp;&nbsp;</a>
+	
+	[/#list]
+	[/@cms_friendlink_list]
+	</div>
+</div>

@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>${site.name} - 我们自己的BBS论坛、平安富邸</title>
+    <meta name="keywords" content="jiagroup、平安富邸" />
+    <meta name="description" content="讨论jiagroup、平安富邸未来发展、关注美丽家园建设" /> 
+	<link href="${resSys}/front.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/${res}/bbs_forum/css/whole.css" />
+    <link rel="stylesheet" type="text/css" href="/${res}/bbs_forum/css/layout.css" />
+    
+    <link rel="icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon" /> 
+  
+    <link rel="stylesheet" type="text/css" href="/static/ad.css" />
+  </head>
+  <body style="background: url(/r/cms/www/blue/bbs_forum/img/backgroud.jpg) no-repeat fixed center bottom;">
+  
+	<div style="margin: 0 auto; overflow:hidden;" id="lwc" name="lwc"><a href="http://count.chanet.com.cn/click.cgi?a=497488&d=360249&u=&e=" target="_blank"><IMG SRC="http://file.chanet.com.cn/image.cgi?a=497488&d=360249&u=&e=" border="0" width="160" height="600"  ></a></div>
+	<div style="margin: 0 auto; overflow:hidden;" id="rwc" ><a href="http://count.chanet.com.cn/click.cgi?a=497488&d=360249&u=&e=" target="_blank"><IMG SRC="http://file.chanet.com.cn/image.cgi?a=497488&d=360249&u=&e=" width="160" height="600"  border="0"></a></div> 
+	<input class="close" id="lwc_c"   type="button"   value=""/>
+	<input class="close"  id="rwc_c"   type="button"   value=""/>
+	
+	
+  <div style="width:1000px; margin:auto;">
+    <!--header--> 
+	[#include "../include/页头.html"/]
+	
+	<!--/header-->
+	<!--20条信息_Begin--> [#include "../include/信息.html"/]<!--/End--> 
+    <!--登录统计栏_Begin-->[#include "../include/登录统计.html"/]<!--登录统计栏_End-->
+	<div style="line-height:28px;">
+	<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="30"><img src="/r/cms/www/blue/bbs_forum/img/top/icon001.gif" /></td>
+    <td>[@config_count]
+	<span style="color:#838383;">今日:</span>${configcache.postToday!} <span style="color:#838383;">| </span>
+	<span style="color:#838383;">昨日:</span> ${configcache.postYestoday!} <span style="color:#838383;">| </span>
+	<span style="color:#838383;">最高日:</span>${configcache.postMax!} 于 ${configcache.postMaxDate?string("yyyy-MM-dd")!} <span style="color:#838383;">| </span>
+	<span style="color:#838383;">主题:</span>${configcache.topicTotal!} <span style="color:#838383;">| </span>
+	<span style="color:#838383;">帖子:</span>${configcache.postTotal!} <span style="color:#838383;">| </span>
+	<span style="color:#838383;">会员:</span>${configcache.userTotal!} <span style="color:#838383;">| </span>
+	<span style="color:#838383;">欢迎新会员:</span><span class="black">[#if configcache.lastUser??]${configcache.lastUser.username!}[#else]无[/#if]</span>
+	
+	[/@config_count]</td>
+  </tr>
+</table>
+
+	</div>
+	</div>
+	<!--main-->
+    <div class="main-wrap">
+    <div id="main">
+	
+    <div id="content">
+    <div class="contentwrap z">
+    [@category_list]
+    [#list tag_list as ctg]
+    <div class="t z">
+    <table width="100%" cellspacing="0" cellpadding="0">
+      <tbody>
+        <tr>
+          <th class="h" colspan="6"><a class="closeicon fr"><img alt="" src="/${res}/bbs_forum/img/cate_fold.gif" /></a>
+          <h2>&raquo; <a class="cfont">${ctg.title!}</a></h2>
+          </th>
+        </tr>
+<!--
+        <tr class="tr2">
+          <td width="*" colspan="2" class="tac">论坛</td>
+          <td class="tal y-style e">主题 / 文章</td>
+          <td class="tal y-style f">最后发表</td>
+          <td style="width: 120px;" class="tal">版主</td>
+        </tr>
+-->
+      </tbody>
+     
+      [@forum_list categoryId=ctg.id]
+      [#if ctg_index == 0]
+			
+	  [#list tag_list as forum]
+	      [#if (forum_index)%ctg.forumCols == 0 && (forum_index) != tag_list?size]
+	      	[#if forum_index == 1]
+				<tr>
+	      	[#else]
+		      	</tr><tr>
+	      	[/#if]
+	      [/#if]
+	      <td width="33%" height="30" bgcolor="#f1f1f1" align="center"><span style="color:#4284ce; font-weight:bold;">${forum.title!}</span></td>
+      [/#list]
+  			</tr>
+
+		<td valign="top">
+              <table width="100%" cellspacing="1" cellpadding="1" border="0" style="border-right:1px solid #d4eff7;">
+                <tbody><tr>
+                  <td style="line-height:24px;padding-left:10px; url('/r/cms/www/blue/bbs_forum/img/dot.gif') no-repeat scroll 0 50% rgba(0, 0, 0, 0)">
+	  [#list newPosts as topic]
+                  ${topic_index+1}.
+                  <a title="${topic.title}" style="color:#4284ce;" href="${topic.url}">
+                  ${topic.shortTitle}</a>
+                  [${topic.creater.username}]
+                  <br>
+	  [/#list]
+                  </td>
+                </tr>
+              </tbody></table>
+              </td>				  
+
+		<td valign="top">
+              <table width="100%" cellspacing="1" cellpadding="1" border="0" style="border-right:1px solid #d4eff7;">
+                <tbody><tr>
+                  <td style="line-height:24px;padding-left:10px;padding-left:10px;">
+	  [#list latestReplyPosts as post]
+                  ${post_index+1}.
+                  <a title="${post.title}" style="color:#4284ce;" href="${post.url}">
+                  ${post.topic.shortTitle}</a>
+                  [${post.creater.username}]
+                  <br>
+	  [/#list]
+                  </td>
+                </tr>
+              </tbody></table>
+              </td>				  
+          
+		<td valign="top">
+              <table width="100%" cellspacing="1" cellpadding="1" border="0" style="border-right:1px solid #d4eff7;">
+                <tbody><tr>
+                  <td style="line-height:24px;padding-left:10px;">
+	  [#list todayHotPosts as post]
+                  ${post_index+1}.
+                  <a title="${post.title}" style="color:#4284ce;" href="${post.url}">
+                  ${post.shortTitle}</a>
+                  [${post.viewCount}]
+                  <br>
+	  [/#list]
+                  </td>
+                </tr>
+              </tbody></table>
+              </td>
+			
+      [#else]
+	      [#list tag_list as forum]
+	      [#if (forum_index)%ctg.forumCols == 0 && (forum_index) != tag_list?size]
+	      	[#if forum_index == 1]
+				<tr class="tr3">
+	      	[#else]
+		      	</tr><tr class="tr3">
+	      	[/#if]
+	      [/#if]
+      <td bgcolor="#FFFFFF">
+	  <table width="100%" align="center" cellpadding="0" cellspacing="0" style="border:1px solid #d4eff7;">
+      <tr >
+        <td rowspan="2" valign="top">
+		<table border="0" cellspacing="0" cellpadding="0" style="margin-top:12px !important; margin-top:5px;">
+          <tr>
+            <td valign="top">
+			[#if forum.postToday gt 0]
+              <div> <img src="/r/cms/www/blue/bbs_forum/img/top/tie002.gif" width="28" height="32"/> </div>
+              [#else]
+              <div> <img src="/r/cms/www/blue/bbs_forum/img/top/tie001.gif" width="28" height="32"/> </div>
+            [/#if]
+			  </td>
+          </tr>
+        </table>
+		</td>
+        <td> </td></tr>
+      
+      <tr>
+        <td valign="top" width="180px">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	      
+	     	  <tr>
+	        	  <td>
+		          	<h3 class="b"><a href="${forum.url!}">${forum.title!}</a></h3>
+				  	[#if forum.postToday gt 0]<span class="b" style="color:#FF0000;">(${forum.postToday!})</span>[/#if]
+				  </td>
+	          </tr>
+	          
+		      <tr>
+		            <td class="tal y-style  e">
+					<span style="color:#838383;">主题:</span>${forum.topicTotal!} &nbsp;
+					<span style="color:#838383;">贴数:</span> <span class="gray2 ">${forum.postTotal!}</span></td>
+			  </tr>
+		      <tr>
+		            <td>
+		          [#if forum.lastPost??]<span style="color:#838383;">标题:</span>
+		          <a href="${forum.lastPost.url!}" title="${forum.lastPost.topic.title!}">[#if forum.lastPost.topic.title?? && forum.lastPost.topic.title?length &gt; 6]
+		          ${forum.lastPost.topic.title?substring(0,6)}..[#else]${forum.lastPost.topic.title!}[/#if]</a> &nbsp;[#else]无[/#if]</td>
+	          </tr>
+		         <tr>
+		           <td> [#if forum.lastPost??]<span style="color:#838383;">最后发表:</span>
+		          <span class="f9">[${forum.lastTime!?string("yyyy-MM-dd")}]</span>&nbsp;[#else]无[/#if]</td></tr>
+		        
+		          <tr>
+		            <td>
+		            [#if forum.lastPost??]
+		          <span style="color:#838383;">作者:</span><span class="gray2">${forum.lastReply.username!}
+		         [#else]无[/#if]        </td></tr>
+	          </table> 
+         </td>
+      </tr>
+          
+          <!-- 主题列表 -->
+         <tr>
+         
+	         <td valign="top" colspan="2" height="133px">
+	              <table width="100%" cellspacing="1" cellpadding="1" border="0">
+	                <tbody><tr>
+	                  <td style="line-height:24px;">
+	                  
+	                  [@topic_day forumId=forum.id day=day count='5' tpl='0' pageNo=1 count=5]
+	                  [#list tag_pagination.list as topic]
+	                  
+	                  <span style="display:block; width:18em; overflow:hidden;height:24px; white-space: nowrap; text-overflow: ellipsis;">
+	                  
+	                  <a href="${topic.url}" style="color:#4284ce;" title="${topic.title}">
+	                  ${topic.shortTitle}</a>
+	                  </span>
+	                   
+	                  [/#list]
+	                  [/@topic_day]
+	                  
+	                  </td>
+	                </tr>
+	              </tbody></table>
+	      	 </td>
+         </tr>
+          
+          
+          </table>
+          </td>
+          [/#list]
+          
+  		</tr>
+		[/#if]
+      [/@forum_list]
+		      
+    </table>
+    </div>
+    [/#list]
+    [/@category_list]
+    </div>
+    </div>
+    </div>
+    [#include "../include/页脚友情链接栏.html"/]
+    </div>
+    <!--/main-->
+    
+	<!--footer--> 
+	[#include "../include/页脚.html"/]
+	<!--footer-->
+	
+    <script src="${resSys}/jquery.js" type="text/javascript"></script>
+    <script src="${resSys}/front.js" type="text/javascript"></script>
+	<script language=JavaScript src="/static/ad.js"></script>
+	<script type="text/javascript">
+		setTimeout("noneheadads()", 5000); //停留时间自己适当调整  
+		      
+	    var height2 = 600; //高度  
+	    function noneheadads(){
+	        height2 = height2 - 10;
+	        if (height2 <= 0) {  
+	            document.getElementById("lwc").style.display = "none";  
+	            document.getElementById("rwc").style.display = "none";  
+	            return;  
+	        } 
+	        document.getElementById("lwc").style.height = height2 + "px";  
+	        document.getElementById("rwc").style.height = height2 + "px";  
+	        setTimeout("noneheadads()", 40);  
+	    }  
+		      
+	</script>
+  </body>
+</html>

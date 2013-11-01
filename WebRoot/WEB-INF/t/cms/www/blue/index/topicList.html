@@ -1,0 +1,7 @@
+	  [#list newPosts as topic]
+                  ${topic_index+1}.
+                  <a title="${topic.title}" style="color:#4284ce;" href="${topic.url}">
+                  ${topic.shortTitle}</a>
+                  [${topic.creater.username}]
+                  <br>
+	  [/#list]
